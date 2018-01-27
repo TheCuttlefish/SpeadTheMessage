@@ -11,6 +11,9 @@ public class TempleFaith : MonoBehaviour {
 	public SpriteRenderer symbol;
 	public SpriteRenderer symbolGlow;
 
+	public ParticleSystem particle01;
+	public ParticleSystem particle02;
+
 	[Range (0.0f, 1.0f)]
 	public float conversionAmount = 0;
 
@@ -24,7 +27,7 @@ public class TempleFaith : MonoBehaviour {
 
 	void Start () {
 
-		playableDirector = GetComponent<PlayableDirector>();
+		playableDirector = GetComponent<PlayableDirector> ();
 
 		if (conversionAmount == 1.0f) {
 			isConversionDone = true;
@@ -47,6 +50,8 @@ public class TempleFaith : MonoBehaviour {
 				SpriteAlpha (symbol, 1.0f);
 				SpriteAlpha (converting, 1.0f);
 
+				particle01.Stop ();
+				particle02.Stop ();
 				playableDirector.Play ();
 
 				//symbol.GetComponent<Animator
@@ -59,6 +64,11 @@ public class TempleFaith : MonoBehaviour {
 			symbol.enabled = false;
 			symbolGlow.enabled = false;
 
+			if (!particle02.isPlaying) {
+				particle01.Play ();
+				particle02.Play ();
+			}
+
 			SpriteAlpha (symbol, 0.0f);
 			SpriteAlpha (converting, conversionAmount);
 
@@ -70,6 +80,13 @@ public class TempleFaith : MonoBehaviour {
 
 		conversionAmount = Mathf.Min (1.0f, conversionAmount + amount);
 		UpdateView ();
+
+	}
+
+	public void OnTriggerExit () {
+
+		particle01.Stop ();
+		particle02.Stop ();
 
 	}
 

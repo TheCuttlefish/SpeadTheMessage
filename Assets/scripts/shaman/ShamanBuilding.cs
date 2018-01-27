@@ -7,11 +7,22 @@ public class ShamanBuilding : MonoBehaviour {
 	public float conversionSpeed = 0.1f;
 
 	void OnTriggerStay (Collider other) {
-		
+
 		if (other.tag == "Temple") {
 
 			var temple = other.GetComponent<TempleFaith> ();
 			temple.AddConversion (conversionSpeed * Time.fixedDeltaTime);
+
+		}
+
+	}
+
+	void OnTriggerExit (Collider other) {
+
+		if (other.tag == "Temple") {
+
+			var temple = other.GetComponent<TempleFaith> ();
+			temple.OnTriggerExit ();
 
 		}
 
