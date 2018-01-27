@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class followerAnimation : MonoBehaviour {
 
-	Follower follower;
-
 	MeshRenderer cubeRenderer;
 
 	public SpriteRenderer converted;
 	public SpriteRenderer notConverted;
 
 	void Start () {
-
-		follower = GetComponent<Follower> ();
+		
 		cubeRenderer = GetComponent<MeshRenderer> ();
 
 	}
