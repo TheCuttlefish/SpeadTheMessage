@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{09A83352-E777-222D-0A5B-62836A846B7D}") = "SpeadTheMessage", "Assembly-CSharp.csproj", "{C05CC0C3-81AD-04A3-8C3D-B9D1AB7B92F3}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeadTheMessage", "Assembly-CSharp.csproj", "{C05CC0C3-81AD-04A3-8C3D-B9D1AB7B92F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
