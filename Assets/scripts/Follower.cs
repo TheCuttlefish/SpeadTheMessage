@@ -10,9 +10,11 @@ public class Follower : MonoBehaviour {
 
 	}
 
-	Transform Player;
+	Transform player;
 	public int freeWill = 0;
 	public int faithTime = 150;
+
+	public bool isConverted = false;
 	void Update () {
 
 		//turn to white!
@@ -21,7 +23,10 @@ public class Follower : MonoBehaviour {
 		faithTime--;
 
 		if (faithTime == 0) {
-			freeWill = 1;
+				GetComponent<FollowerFaith> ().myFaithMeter = 1.0f;
+				freeWill = 1;
+			isConverted = false;
+
 		}
 
 	}
@@ -48,28 +53,28 @@ public class Follower : MonoBehaviour {
 			transform.Translate (3 * xSpeed * t, 3 * ySpeed * t, 0);
 		}
 
-		if (Player != null) {
+		if (player != null) {
 
-			float dist = Vector3.Distance (transform.position, Player.transform.position);
+			float dist = Vector3.Distance (transform.position, player.transform.position);
 			if (dist > 2.5f) {
 
-				if (Player.GetComponent<PlayerLogic> ().follow) {
-					transform.position = Vector3.Lerp (transform.position, Player.transform.position, 3.0f * t);
+				if (player.GetComponent<PlayerLogic> ().follow) {
+					transform.position = Vector3.Lerp (transform.position, player.transform.position, 3.0f * t);
 				} else {
-					transform.position = Vector3.Lerp (transform.position, Player.transform.position, 1.0f * t);
+					transform.position = Vector3.Lerp (transform.position, player.transform.position, 0.5f * t);
 				}
 
 			} else {
-				transform.position = Vector3.Lerp (transform.position, Player.transform.position, 0.0001f * t);
+				transform.position = Vector3.Lerp (transform.position, player.transform.position, 0.0001f * t);
 			}
 		}
 	}
 
 	void OnTriggerStay (Collider other) {
 
-		if (other.name == "Player") {
+		if (other.tag == "Player") {
 			GetConverted ();
-			Player = other.transform;
+			player = other.transform;
 		}
 
 		if (other.tag == "Temple") {
@@ -103,11 +108,11 @@ public class Follower : MonoBehaviour {
 
 	void OnTriggerExit (Collider other) {
 
-		if (other.name == "Player") {
-			//GetComponent<MeshRenderer>().material.color = Color.white;
-			Player = null;
-		} else if ( other.tag == "Temple") {
-			if ( church == other.GetComponent<Church> ()) {
+		if (other.tag == "Player") {
+
+			player = null;
+		} else if (other.tag == "Temple") {
+			if (church == other.GetComponent<Church> ()) {
 				church.RemoveFollower ();
 				church = null;
 			}
@@ -116,8 +121,13 @@ public class Follower : MonoBehaviour {
 	}
 
 	void GetConverted () {
+
+		
+
+		isConverted = true;
 		freeWill = 0;
 		faithTime = 200;
 		GetComponent<MeshRenderer> ().material.color = Color.blue;
+
 	}
 }
