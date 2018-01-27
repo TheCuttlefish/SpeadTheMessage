@@ -6,17 +6,42 @@ public class PlayerLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		GetComponent<MeshRenderer> ().material.color = Color.blue;
 	}
 
-
+	public bool follow;
 
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
+		Movement ();
 
-		transform.Translate ( Input.GetAxis("Horizontal")*0.2f, Input.GetAxis("Vertical")*0.2f,0);
-		
 	}
+
+
+	void Movement(){
+		
+		float InputH = Input.GetAxis ( "Horizontal" );
+		float InputV = Input.GetAxis ( "Vertical" );
+		float t = Time.deltaTime;
+		float walkingSpeed = 5.0f;
+		float runningSpeed = 11.0f;
+
+		if(Input.GetKey( KeyCode.LeftShift )){
+			//walking
+			transform.Translate ( InputH * walkingSpeed * t, InputV * walkingSpeed * t , 0);
+			follow = true;
+		}else {
+			//running
+			transform.Translate ( InputH * runningSpeed * t, InputV * runningSpeed * t,0);
+			follow = false;
+		}
+	}
+
+
+
+
+
+
 }
