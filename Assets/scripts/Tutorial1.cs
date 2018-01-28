@@ -7,7 +7,7 @@ public class Tutorial1 : MonoBehaviour {
 	public Text goal;
 	public Text complete;
 	bool stageComplete = false;
-	int timer = 100;
+	int timer = 300;
 	// Use this for initialization
 	void Start () {
 
