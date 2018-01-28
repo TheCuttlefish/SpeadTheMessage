@@ -6,8 +6,8 @@ public class followerAnimation : MonoBehaviour {
 
 	MeshRenderer cubeRenderer;
 
-	public SpriteRenderer converted;
-	public SpriteRenderer notConverted;
+	public SpriteRenderer shirt;
+
 
 	void Start () {
 		
@@ -17,9 +17,7 @@ public class followerAnimation : MonoBehaviour {
 
 	void Update () {
 
-		var color = converted.color;
-		color.a = 1.0f - cubeRenderer.material.color.r;
-		converted.color = color;
+		shirt.color = cubeRenderer.material.color;
 
 	}
 }

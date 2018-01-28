@@ -15,7 +15,20 @@ public class FollowerFaith : MonoBehaviour {
 	}
 	void UpdateFaith () {
 		sphereColl.radius = 1.25f * myFaithMeter;
-		circleArt.transform.localScale = new Vector3 (1.0f * myFaithMeter, 1.0f * myFaithMeter, 1.0f);
+		circleArt.transform.localScale = new Vector3 (0.4f * myFaithMeter, 0.4f * myFaithMeter, 0.4f);
+
+
+		//colours
+		if (GetComponent<Follower> ().religionType == 0) {
+			circleArt.color = new Color (1, 1, 1, 0.4f);
+		}
+		if (GetComponent<Follower> ().religionType == 1) {
+			circleArt.color = new Color (0,0.7f, 1, 0.7f);
+		}
+		if (GetComponent<Follower> ().religionType == 2) {
+			circleArt.color = new Color (1, 0.1f, 0.4f, 0.7f);
+		}
+
 	}
 	// Update is called once per frame
 	void Update () {

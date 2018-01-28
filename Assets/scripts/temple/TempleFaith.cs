@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 public class TempleFaith : MonoBehaviour {
@@ -19,13 +20,22 @@ public class TempleFaith : MonoBehaviour {
 
 	bool isConversionDone = false;
 
+	public int religionType = 0;
+
 	public bool isConverted {
 		get { return 1.0 == conversionAmount; }
 	}
 
 	PlayableDirector playableDirector;
 
+	SpriteRenderer aura;
+
+	public UnityEvent onReligionChange = new UnityEvent ();
+
 	void Start () {
+		//set up aura colour
+		aura = transform.Find ("faith_radius").GetComponent<SpriteRenderer> ();
+		aura.color = Color.white;
 
 		playableDirector = GetComponent<PlayableDirector> ();
 
@@ -36,7 +46,28 @@ public class TempleFaith : MonoBehaviour {
 		}
 		UpdateView ();
 	}
+	void UpdateAura () {
+		if (religionType == 0) {
+			aura.color = new Color (1, 1, 1, 0.2f);
+		}
+		if (religionType == 1) {
+			aura.color = new Color (0, 0.7f, 1, 0.7f);
+		}
+		if (religionType == 2) {
+			aura.color = new Color (1, 0.1f, 0.4f, 0.7f);
+		}
+	}
 
+	public void ChangeReligion (int newRelig) {
+
+		religionType = newRelig;
+		onReligionChange.Invoke();
+
+	}
+
+	void Update () {
+		UpdateAura ();
+	}
 	void UpdateView () {
 
 		if (conversionAmount == 1.0f) {

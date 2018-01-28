@@ -13,6 +13,11 @@ public class ShamanBuilding : MonoBehaviour {
 			var temple = other.GetComponent<TempleFaith> ();
 			temple.AddConversion (conversionSpeed * Time.fixedDeltaTime);
 
+			//if not converted - change religion
+			if (!temple.isConverted) {
+				temple.ChangeReligion( GetComponent<PlayerLogic> ().playerNum + 1 );
+			}
+
 		}
 
 	}
