@@ -15,7 +15,7 @@ public class ShamanBuilding : MonoBehaviour {
 
 			//if not converted - change religion
 			if (!temple.isConverted) {
-				temple.religionType = GetComponent<PlayerLogic> ().playerNum + 1;
+				temple.ChangeReligion( GetComponent<PlayerLogic> ().playerNum + 1 );
 			}
 
 		}

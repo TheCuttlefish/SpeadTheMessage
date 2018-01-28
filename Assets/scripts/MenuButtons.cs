@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+// using UnityEditor.SceneManagement;
 public class MenuButtons : MonoBehaviour {
 
 
@@ -13,12 +13,12 @@ public class MenuButtons : MonoBehaviour {
 
 	public void PlayGame(){
 		print ("play");
-		Application.LoadLevel(1);
+		// Application.LoadLevel(1);
 	}
 
 	public void QuitGame(){
 			print ("quit!!");
-			Application.Quit ();
+			// Application.Quit ();
 	}
 	// Update is called once per frame
 	void Update () {

@@ -127,7 +127,7 @@ public class Follower : MonoBehaviour {
 		if (church == null && other.tag == "Temple") {
 			//1.0 if religious and is same religion ????? then do that?
 				church = other.GetComponent<Church> ();
-				church.AddFollower ();
+				church.OnFollowerEnter ( this );
 
 		}
 
@@ -141,7 +141,7 @@ public class Follower : MonoBehaviour {
 		} else if (other.tag == "Temple") {
 			//1.1 same as in Enter??
 			if (church == other.GetComponent<Church> ()) {
-				church.RemoveFollower ();
+				church.OnFollowerLeave ( this );
 				church = null;
 			}
 		}
