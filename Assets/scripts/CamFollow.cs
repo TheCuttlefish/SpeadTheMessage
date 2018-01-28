@@ -12,6 +12,22 @@ public class CamFollow : MonoBehaviour {
 	public float speed = 1.0f;
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.position = Vector3.Lerp (transform.position,new Vector3(player.transform.position.x, player.transform.position.y, -10.0f), speed);
+
+		// A: Floor under Cam
+		// B: PLayer
+		// C: Camera
+
+		// var angleA = 90.0f;
+		// var angleC = 180.0f - Vector3.Angle( -player.forward, transform.forward );
+		// print(angleC);
+		// var angleB = 180.0f - angleA - angleC;
+
+		// var distB = transform.position.z;
+		// var distA = - (distB / Mathf.Sin( angleB ) ) * Mathf.Sign( angleA );
+
+		var distA = 10.0f;
+
+		var newPos = player.position - distA * transform.forward;
+		transform.position = Vector3.Lerp ( transform.position, newPos , speed );
 	}
 }
