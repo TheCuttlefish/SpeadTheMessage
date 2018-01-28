@@ -15,16 +15,16 @@ public class ShamanFaith : MonoBehaviour {
 		UpdateFaith ();
 
 		if (GetComponent<PlayerLogic> ().playerNum == 0) {
-			circleArt.color = new Color (0.2f, 0.2f, 1, 0.3f);
+			circleArt.color = new Color (0.0f, 0.5f, 1, 0.7f);
 		} else {
-			circleArt.color = new Color (1, 0, 0, 0.3f);
+			circleArt.color =  new Color (1, 0.1f, 0.4f, 0.7f);
 
 		}
 	}
 
 	void UpdateFaith () {
 		sphereColl.radius = 2.5f * faithMeter;
-		circleArt.transform.localScale = new Vector3 (1.9f * faithMeter, 1.9f * faithMeter, 1.0f);
+		circleArt.transform.localScale = new Vector3 (0.6f * faithMeter, 0.6f * faithMeter, 1.0f);
 	}
 
 	// Update is called once per frame
@@ -34,7 +34,8 @@ public class ShamanFaith : MonoBehaviour {
 		people = GameObject.FindGameObjectsWithTag ("Person");
 		float myFollowers = 0;
 		for (int i = 0; i < people.Length; i++) {
-			if (people[i].GetComponent<Follower> ().isConverted) {
+			if (people[i].GetComponent<Follower> ().isConverted &&
+				people[i].GetComponent<Follower>().religionType == GetComponent<PlayerLogic>().playerNum + 1) {
 				//folloers limit
 				if (myFollowers < 5) {
 					myFollowers++;
