@@ -9,16 +9,22 @@ public class ShamanFaith : MonoBehaviour {
 	SphereCollider sphereColl;
 	public GameObject[] people;
 	void Start () {
-		
+
 		circleArt = transform.Find ("faith_radius").GetComponent<SpriteRenderer> ();
 		sphereColl = transform.GetComponent<SphereCollider> ();
 		UpdateFaith ();
-		//circleArt.color = Color.red;
+
+		if (GetComponent<PlayerLogic> ().playerNum == 0) {
+			circleArt.color = new Color (0.2f, 0.2f, 1, 0.3f);
+		} else {
+			circleArt.color = new Color (1, 0, 0, 0.3f);
+
+		}
 	}
 
 	void UpdateFaith () {
-		sphereColl.radius = 4.19f * faithMeter;
-		circleArt.transform.localScale = new Vector3 (3.3f * faithMeter, 3.3f * faithMeter, 1.0f);
+		sphereColl.radius = 2.5f * faithMeter;
+		circleArt.transform.localScale = new Vector3 (1.9f * faithMeter, 1.9f * faithMeter, 1.0f);
 	}
 
 	// Update is called once per frame
@@ -30,7 +36,7 @@ public class ShamanFaith : MonoBehaviour {
 		for (int i = 0; i < people.Length; i++) {
 			if (people[i].GetComponent<Follower> ().isConverted) {
 				//folloers limit
-				if(myFollowers<5){
+				if (myFollowers < 5) {
 					myFollowers++;
 				}
 			}
