@@ -61,12 +61,18 @@ public class TempleFaith : MonoBehaviour {
 	public void ChangeReligion (int newRelig) {
 
 		religionType = newRelig;
-		onReligionChange.Invoke();
+		onReligionChange.Invoke ();
 
 	}
 
 	void Update () {
 		UpdateAura ();
+	}
+
+	public void BecomeNeutral () {
+		isConversionDone= false;
+		conversionAmount = 0.0f;
+		religionType = 0;
 	}
 	void UpdateView () {
 

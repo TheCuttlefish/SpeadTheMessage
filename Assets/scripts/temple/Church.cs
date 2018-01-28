@@ -76,17 +76,12 @@ public class Church : MonoBehaviour {
 
 				timer = 0.0f;
 
-				BecomeNeutral ();
+				faith.BecomeNeutral ();
+				print ("BecomeNeutral");
 
 			}
 
 		}
-
-	}
-
-	void BecomeNeutral () {
-
-		print ("BecomeNeutral");
 
 	}
 }

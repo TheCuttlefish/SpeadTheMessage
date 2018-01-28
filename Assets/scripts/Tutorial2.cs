@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
 public class Tutorial2 : MonoBehaviour {
 	public Text goal;
 	public Text complete;
@@ -25,7 +25,6 @@ public class Tutorial2 : MonoBehaviour {
 
 		}
 
-
 		goal.text = myTemps + "/3";
 
 		if (myTemps == 3) {
@@ -36,11 +35,9 @@ public class Tutorial2 : MonoBehaviour {
 		if (stageComplete) {
 			timer--;
 			if (timer < 0) {
-				Application.LoadLevel(3);
+				SceneManager.LoadScene (3);
 			}
 		}
-
-
 
 	}
 }
