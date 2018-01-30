@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Church : MonoBehaviour {
 
@@ -11,9 +12,16 @@ public class Church : MonoBehaviour {
 
 	TempleFaith faith;
 
-	List<Follower> followersList = new List<Follower> ();
+	public List<Follower> followersList = new List<Follower> ();
 
-	List<Follower> peopleIn = new List<Follower> ();
+	public List<Follower> peopleIn = new List<Follower> ();
+
+	[Range(1,10)]
+	public int followersToWin = 3;
+
+	public PlayableDirector winCanvas;
+
+	bool gameOver = false;
 
 	void Start () {
 		faith = GetComponent<TempleFaith> ();
@@ -38,7 +46,7 @@ public class Church : MonoBehaviour {
 	}
 
 	bool isBeliever (Follower person) {
-		return (person.religionType == faith.religionType && faith.religionType != 0);
+		return (person.religionType == faith.religionType);
 	}
 
 	public void OnFollowerEnter (Follower person) {
@@ -47,6 +55,21 @@ public class Church : MonoBehaviour {
 
 		if (isBeliever (person)) {
 			followersList.Add (person);
+		}
+
+		checkGameOver();
+	}
+
+	void checkGameOver(){
+
+		if( gameOver ) return;
+
+		print("checkGameOver");
+		
+		if( followersList.Count >= followersToWin ) {
+			print("ON WIIIN");
+			winCanvas.Play();
+			gameOver = true;
 		}
 	}
 
