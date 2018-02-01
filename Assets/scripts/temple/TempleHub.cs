@@ -7,7 +7,7 @@ public class TempleHub : MonoBehaviour {
 
 	public Text text;
 	public Camera cam;
-	public Canvas canvas;
+	public RectTransform canvas;
 
 	Church church;
 	RectTransform textRect;
@@ -38,13 +38,24 @@ public class TempleHub : MonoBehaviour {
 
 	}
 
-	Vector2 WorldToCanvas (Canvas canvas, Vector3 worldPos, Camera camera) {
+	Vector2 WorldToCanvas (RectTransform canvas, Vector3 worldPos, Camera camera) {
 
-		var viewport_position = camera.WorldToViewportPoint (worldPos);
-		var canvas_rect = canvas.GetComponent<RectTransform> ();
+		var viewportStartX = 0.0f;
+		var viewportEndX = 1.0f;
+		var canvasStartX = 0.5f;
+		var canvasEndX = 1.0f;
 
-		return new Vector2 ((viewport_position.x * canvas_rect.sizeDelta.x) - (canvas_rect.sizeDelta.x * 0.5f),
-			(viewport_position.y * canvas_rect.sizeDelta.y) - (canvas_rect.sizeDelta.y * 0.5f));
+		var viewportRange = viewportEndX - viewportStartX;
+		var canvasRange = canvasEndX - canvasStartX;
+
+		// TODO: Implement this https://developer.leapmotion.com/documentation/csharp/devguide/Leap_Coordinate_Mapping.html
+
+		// var canvasX = ( )
+
+		var viewport = camera.WorldToViewportPoint (worldPos);
+
+		return new Vector2 ((viewport.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * .5f),
+			(viewport.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f));
 	}
 
 }
