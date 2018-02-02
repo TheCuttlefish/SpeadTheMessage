@@ -29,7 +29,8 @@ public class TempleHub : MonoBehaviour {
 	void UpdateTextPos () {
 
 		// Vector2 screenPos = cam.WorldToScreenPoint (transform.position);
-		textRect.anchoredPosition = WorldToCanvas( canvas, transform.position, cam );
+		var pos = transform.position + transform.right;
+		textRect.anchoredPosition = WorldToCanvas (canvas, pos, cam);
 		//screenPos - canvas.sizeDelta * 0.5f + Vector2.left * 100.0f;
 
 	}
@@ -40,15 +41,16 @@ public class TempleHub : MonoBehaviour {
 
 	Vector2 WorldToCanvas (RectTransform canvas, Vector3 worldPos, Camera camera) {
 
-
 		var viewport = camera.WorldToViewportPoint (worldPos);
 
 		float x;
 
-		if( transform.name =="temple"){
+		if (viewport.x < 0.1f || viewport.x >.9f) {
+			x = -9.0f * canvas.sizeDelta.x;
+		} else if (transform.name == "temple") {
 			x = canvas.sizeDelta.x * viewport.x * 0.5f;
-		}else{
-			x = -canvas.sizeDelta.x * viewport.x * 0.5f;
+		} else {
+			x = canvas.sizeDelta.x * viewport.x * 0.5f - canvas.sizeDelta.x * 0.5f;
 		}
 
 		return new Vector2 (
