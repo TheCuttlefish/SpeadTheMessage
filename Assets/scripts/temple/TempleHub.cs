@@ -40,21 +40,19 @@ public class TempleHub : MonoBehaviour {
 
 	Vector2 WorldToCanvas (RectTransform canvas, Vector3 worldPos, Camera camera) {
 
-		var viewportStartX = 0.0f;
-		var viewportEndX = 1.0f;
-		var canvasStartX = 0.5f;
-		var canvasEndX = 1.0f;
-
-		var viewportRange = viewportEndX - viewportStartX;
-		var canvasRange = canvasEndX - canvasStartX;
-
-		// TODO: Implement this https://developer.leapmotion.com/documentation/csharp/devguide/Leap_Coordinate_Mapping.html
-
-		// var canvasX = ( )
 
 		var viewport = camera.WorldToViewportPoint (worldPos);
 
-		return new Vector2 ((viewport.x * canvas.sizeDelta.x) - (canvas.sizeDelta.x * .5f),
+		float x;
+
+		if( transform.name =="temple"){
+			x = canvas.sizeDelta.x * viewport.x * 0.5f;
+		}else{
+			x = -canvas.sizeDelta.x * viewport.x * 0.5f;
+		}
+
+		return new Vector2 (
+			x,
 			(viewport.y * canvas.sizeDelta.y) - (canvas.sizeDelta.y * 0.5f));
 	}
 
